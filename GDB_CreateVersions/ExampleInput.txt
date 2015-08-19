@@ -1,0 +1,9 @@
+VersionName,ParentVersion
+Editing,DBO.Default
+GIS Manager,DBO.Editing
+Rose,DBO.GIS Manager
+Engineering,DBO.Editing
+Ron,DBO.Engineering
+Nate,DBO.Engineering
+Jay,DBO.Engineering
+

@@ -1,0 +1,5 @@
+EditVersions,TargetVersion
+DBO.Jay;DBO.Nate;DBO.Ron,DBO.Engineering
+DBO.Rose,DBO.GIS Manager
+DBO.Engineering;DBO.GIS Manager,DBO.Editing
+DBO.Editing,DBO.Default
