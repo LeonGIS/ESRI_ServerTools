@@ -5,6 +5,20 @@ Combined ArcGIS Server related python scripts into single project
 
 ##GDB_CreateVersions
 ###Description
+Creates geodatabase versions from a input file with listed name and parent version pairs
+
+###Command Line Example: 
+GDB_CreateVersions.py -d "Database Connections/geobase.sde" -i "GeodatabaseVersions.lst" -l "logfile.log"
+
+Command Line Arguments
+* -d: Database connection
+* -i: To Do List
+* -l: Log file
+
+Input file format (must have header row):
+* VersionName,ParentVersion
+* Editing,DBO.Default
+* GIS Manager,DBO.Editing
 
 ## GDB_DomainCleanup
 
