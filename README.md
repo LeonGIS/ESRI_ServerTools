@@ -1,13 +1,13 @@
 # ESRI_ServerTools
 
 
-#SyncReplicas
+##GDB_SyncReplicas
 
 Description - Reads in command line arguements for synchronizing replicas for Esri geodatabases.  I first developed this as a VB console app several years ago and finally moved it into a python script.  Adding and removing replicas from a scheduled synchronization is as easy as modifying a list in a text file.
 
 Command Line Example: 
 
-SyncReplicas.py -p "Database Connections\\YourDb.sde"  -c "\\YourServer\\serverdata\\YourRemotePub.gdb" -i "C:\development\Python\SyncReplicas\agspub.txt" -l "C:\development\Python\SyncReplicas\Sync.log"
+GDB_SyncReplicas.py -p "Database Connections\\YourDb.sde"  -c "\\YourServer\\serverdata\\YourRemotePub.gdb" -i "C:\development\Python\SyncReplicas\agspub.txt" -l "C:\development\Python\SyncReplicas\Sync.log"
 
 Command Line Arguments:
 * -p: Parent geodatabase connection
@@ -32,7 +32,7 @@ Each subsequent line has the following information
 *  ConflictDetect: How conflicts are defined options (BY_OBJECT, BY_ATTRIBUTE) See ArcGIS help for Synchronzize changes tool
 
 
-# GDB_DomainCleanup
+## GDB_DomainCleanup
 
 ##Description
 Reads in command line arguements for listing and deleting Esri unused geodatabases domains.  For SDE geodatabases, the script must be run as the owner of the domain for the delete option to function
