@@ -1,29 +1,22 @@
-# -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------------
-# GDB_RecAndPost.py
+# GDB_CreateVersionis.py
 # Created on: 2015-08-19
 
 # Description: 
-# Reconciles and Posts a list of versions found in one of two files:
-#       todolist.txt (all processed by the same user)
-#       todolist.lst (all processed by different users ... as described in the file)
-#   It uses connection.txt to find the server and instance.
-#   It uses the recnpost.cred to make it's initial connection and, depending on which
-#       list is used, process all of the versions.
-#   It writes out a log file containing a summary of all the attempted work, whether
-#       each attempt succeeds or fails, and why.  A new log file is generated on each
-#       day that it is run.
-#   All files are in the installation directory.
-#   The idea is that you configure this application to run with the Windows Task Scheduler
-#       or an RDBMS Job ... so that it runs on a regular interval.
+# Creates geodatabase versions from a input file with listed name and parent version pairs
 
 # Command Line Example: 
-# GDB_RecAndPost.py -d "Database Connections/geobase.sde" -i "GeodatabaseVersions.lst" -l "logfile.log"
+# GDB_CreateVersions.py -d "Database Connections/geobase.sde" -i "GeodatabaseVersions.lst" -l "logfile.log"
+
 # Command Line Arguments
 # -d: Database connection
 # -i: To Do List
 # -l: Log file
 
+# Input file format (must have header row):
+# VersionName,ParentVersion
+# Editing,DBO.Default
+# GIS Manager,DBO.Editing
 
 #---------------------------------------------------------------------------
 
@@ -35,18 +28,13 @@ import arcpy
 import logging
 import sys, getopt
 import csv
-from time import  strftime, localtime
 
 def main(argv):
-    print 'start'
-    
     try:
-      opts, args = getopt.getopt(argv,"d:i:l:e:",["gdbconn=","inputlist=","logfile="])
+      opts, args = getopt.getopt(argv,"d:i:l:",["gdbconn=","inputlist=","logfile="])
     except getopt.GetoptError:
       print 'test.py -d <gdbconn> -i <inputlist> -l <logfile>'
       sys.exit(2)
-
-    print 'parse options'
 
     for o, a in opts:
         if o in ("-d", "--gdbconn"):
@@ -64,18 +52,20 @@ def main(argv):
                         datefmt='%a, %d %b %Y %H:%M:%S',
                         filename=  LOG_FILENAME,
                         filemode='a')
-    # Local variables:
+  
+    # Get input file
     try:
         todo = csv.DictReader(open(InputList, 'r'),  delimiter=',')
     except:
         logging.info('Failed to read input list!')
         sys.exit(2)
 
+    # Read through input file
     for row in todo:
         print row
         NewVersion = row.get('VersionName')
         ParentVersion = row.get('ParentVersion')
-        #Generate Rec and Post Log file name
+        # Create version
         try:
             arcpy.CreateVersion_management(in_workspace=GDBConn, 
                                            parent_version=ParentVersion, 
