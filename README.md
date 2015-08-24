@@ -1,5 +1,8 @@
 # ESRI_ServerTools
 
+###Description
+Combined ArcGIS Server related python scripts into single project
+
 ##GDB_CreateVersions
 
 ## GDB_DomainCleanup
